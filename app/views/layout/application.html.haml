@@ -1,0 +1,22 @@
+!!! Strict
+%html
+  %head
+    %title StartupApp
+    %meta{ :content => 'text/html; charset=utf-8', 'http-equiv' => "content-type" }/
+    = css_include_tag :master
+%body
+  #container
+    #login
+      - if session.authenticated?
+        = link_to "edit your account", url(:edit_user, session.user)
+        = link_to "logout", url(:logout)
+        - else
+          = link_to "register new user", url(:new_user)
+          = link_to "login", url(:login)
+    #content	
+      - message.each_pair do |type, msg|
+        = tag :div, msg, :class => type.to_s, :id => "flash"
+
+      = catch_content :for_layout
+
+

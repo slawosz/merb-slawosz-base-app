@@ -1,0 +1,16 @@
+%h1
+  Users controller, edit action
+
+= error_messages_for @user
+
+= form_for(@user, :action => url(:user, @user)) do
+  %p
+    = partial :form
+    - if session.user.admin?
+      = check_box :admin, :label => :is_admin?
+  %p
+    = submit "Update"
+
+= link_to 'Show', url(:user, @user)
+|
+= link_to 'Back', url(:users)
